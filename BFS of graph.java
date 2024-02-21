@@ -1,20 +1,26 @@
-public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
-        ArrayList<Integer> ans = new ArrayList<Integer>();
-        HashSet<Integer> visited = new HashSet<Integer>();
-        Queue<ArrayList<Integer>> que = new LinkedList<ArrayList<Integer>>();
-        que.add(adj.get(0));
-        visited.add(0);
-        ans.add(0);
-        while(!que.isEmpty()){
-            ArrayList<Integer> temp = que.poll();
-            for(int i=0;i<temp.size();i++){
-                if(!visited.contains(temp.get(i))){
-                    que.add(adj.get(temp.get(i)));
-                    visited.add(temp.get(i));
-                    ans.add(temp.get(i));
+class Solution {
+    // Function to return Breadth First Traversal of given graph.
+    public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+        ArrayList<Integer> ans=new ArrayList<>();
+        Queue<Integer> q=new LinkedList<>();
+        boolean arr[]=new boolean[adj.size()];
+        q.add(0);
+        while (!q.isEmpty()) {
+            int curr = q.remove();
+
+            if (!arr[curr]) {
+                ans.add(curr);
+                arr[curr] = true;
+
+                for (int i = 0; i < adj.get(curr).size(); i++) {
+                    int e = adj.get(curr).get(i);
+                    if (!arr[e]) {
+                        q.add(e);
+                    }
                 }
             }
         }
         return ans;
     }
-
+    
+}
