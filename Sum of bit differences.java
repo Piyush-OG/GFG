@@ -1,21 +1,14 @@
-class Solution{
-public:
-	
-	long long sumBitDifferences(int arr[], int n) {
-	    // code here
-	   long long ans = 0;
-	   
-	   for(int i = 0;i<32;i++){
-	       
-	       long long count = 0;
-	       
-	       for(int j = 0;j<n;j++){
-	           // at each position find the set bit
-	           if(arr[j]&(1<<i))count++;
-	           
-	       }
-	       ans+=count*(n-count)*2;
-	   }
-	   return ans;
-	}
-};
+class Solution {
+    long sumBitDifferences(int[] arr, int n) {
+         long ans = 0;
+        for(int i=31;i>=0;i--){
+            long count = 0;
+            for(int j=0;j<n;j++){
+                if((arr[j] & (1<<i))!=0)
+                count++;
+            }
+            ans += 2*count*(n-count);
+        }
+        return ans;
+    }
+}
